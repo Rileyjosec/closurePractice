@@ -9,12 +9,11 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+ var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
-
+  inner();
 
 
 //Next problem
@@ -27,16 +26,16 @@ var callFriend = function(){
     return 'Calling ' + friend + ' at ' + number;
   }
   return callF;
-};
+}
 
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+  
 
 
-
-//Next Problem
+var friend = callFriend();
+friend("435-215-9248");
 
 
 
@@ -44,8 +43,15 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
+
   //Code Here
-  var count = makeCounter();
+var count = makeCounter(); 
+  var makeCounter = function () {
+  var val = 0;
+    return function () {
+    return val += 1;
+    };
+};
   count() // 1
   count() // 2
   count() // 3
@@ -63,6 +69,36 @@ var callFriend = function(){
   Once completed, add a second arguments that allows the function to be invoked N number of times.
   After the function has been called N number of times, console.log('STAHHP');
 */
+ 
+ //First step
+var callOnce = function(cb, n) {
+  var count = n; 
+  return function () {
+  if (count === 0) { 
+    alert("stahhp");
+
+   }
+   else {
+    count--;
+    cb()
+  }
+ }
+}
+
+var cb = callOnce(function(){alert("hi")});
+
+
+
+
+var limitedFunc = callOnce(function(){alert('hi')}, 2);
+limitedFunc(); //'hi'
+limitedFunc(); //'hi'
+limitedFunc(); //'Stahhp'
+limitedFunc(); //'Stahhp'
+
+
+
+
 
 
 
